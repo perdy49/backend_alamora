@@ -15,28 +15,21 @@
 
 // export default db;
 
-import fs from "fs";
-import mysql from "mysql2/promise";
+import mysql from "mysql2";
+import dotenv from "dotenv";
 
-async function importDB() {
-  const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    multipleStatements: true
-  });
+dotenv.config();
 
-  const sql = fs.readFileSync("alamora_db.sql", "utf8");
-  await connection.query(sql);
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
-  console.log("✅ DATABASE BERHASIL DIIMPORT");
-  await connection.end();
-}
+const db = pool.promise();
 
-importDB()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("❌ IMPORT DB GAGAL:", err);
-    process.exit(1);
-  });
+export default db;
