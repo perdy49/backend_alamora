@@ -10,7 +10,7 @@ async function importDB() {
     multipleStatements: true
   });
 
-  const sql = fs.readFileSync("alamora_db.sql", "utf8");
+fs.readFileSync(new URL("../alamora_db.sql", import.meta.url), "utf8");
   await connection.query(sql);
 
   console.log("✅ DATABASE BERHASIL DIIMPORT");
