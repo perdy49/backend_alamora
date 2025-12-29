@@ -83,6 +83,11 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.json({ status: "Backend Alamora OK 🚀" });
+});
+
+
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use(express.json());
