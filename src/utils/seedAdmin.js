@@ -1,8 +1,10 @@
 import db from "../config/db.js";
 
-const ADMIN_NAME = "faisal";
+const ADMIN_USERNAME = "faisal";
+const ADMIN_NAME = "Faisal";
 const ADMIN_EMAIL = "admin@alamora.com";
-const ADMIN_PASSWORD = "123456"; // ← ini key code default
+const ADMIN_PASSWORD = "123456"; // key code / password admin
+const ADMIN_ROLE = "admin";
 
 export const seedAdmin = async () => {
   try {
@@ -16,12 +18,13 @@ export const seedAdmin = async () => {
     }
 
     await db.query(
-      "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)",
-      [ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD]
+      `INSERT INTO admins (username, name, email, password, role)
+       VALUES (?, ?, ?, ?, ?)`,
+      [ADMIN_USERNAME, ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_ROLE]
     );
 
     console.log("Admin seeded successfully");
   } catch (err) {
-    console.error("Seed admin failed:", err.message);
+    console.error("Seed admin failed:", err);
   }
 };
