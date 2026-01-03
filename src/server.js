@@ -68,6 +68,7 @@ import newsRoutes from "./routes/newsRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import { seedAdmin } from "./utils/seedAdmin.js";
 
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -108,7 +109,9 @@ app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/transactions", transactionRoutes);
+
 await seedAdmin();
+
 
 // =========================
 //        SERVER
