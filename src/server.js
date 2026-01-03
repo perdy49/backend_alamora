@@ -66,6 +66,7 @@ import eventRoutes from "./routes/eventRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import newsRoutes from "./routes/newsRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
+import { seedAdmin } from "./utils/seedAdmin.js";
 
 dotenv.config();
 const app = express();
@@ -107,6 +108,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/transactions", transactionRoutes);
+await seedAdmin();
 
 // =========================
 //        SERVER
